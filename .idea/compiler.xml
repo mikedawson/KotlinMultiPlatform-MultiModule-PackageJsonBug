@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="kmpmod1_jvmMain" target="1.8" />
       <module name="kmpmod1_jvmTest" target="1.8" />
+      <module name="kmpmod2_jvmMain" target="1.8" />
+      <module name="kmpmod2_jvmTest" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

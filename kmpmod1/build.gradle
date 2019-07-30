@@ -1,0 +1,95 @@
+
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.multiplatform'
+    id 'maven-publish'
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 28
+    }
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+group rootProject.group
+version rootProject.version
+
+kotlin {
+    jvm {
+        compilations.main.kotlinOptions {
+            // Setup the Kotlin compiler options for the 'main' compilation:
+            jvmTarget = "1.8"
+        }
+
+        compilations.test.kotlinOptions {
+            // Setup the Kotlin compiler options for the 'main' compilation:
+            jvmTarget = "1.8"
+        }
+    }
+
+    android()
+
+    js {
+        nodejs()
+
+        compilations.main.kotlinOptions {
+            metaInfo = true
+            sourceMap = true
+            moduleKind = "commonjs"
+        }
+    }
+
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common:1.3.41"
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41"
+            }
+        }
+
+        jvmMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.41"
+            }
+        }
+
+        jsMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-js:1.3.41"
+            }
+        }
+    }
+
+
+
+
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId rootProject.group
+            artifactId project.name
+            version rootProject.version
+        }
+    }
+
+    repositories {
+        maven {
+            url "../kmptestrepo"
+        }
+    }
+}
